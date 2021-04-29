@@ -9,9 +9,12 @@ read -p "Enter the number:" NUMBER
 if [ $NUMBER -eq 1 ]; then
     read -p "Enter the user name to add:" USER
     useradd $USER
+    echo "user $USER is added"
 elif [ $NUMBER -eq 2 ] ; then
       read -p "Enter the user name to delete:" USER
       userdel -r $USER
+      echo "user  $USER is deleted"
 else
-     echo "enter ONLY the number 1 or 2 "
+     echo "Must enter number 1 or 2. If you entered other numbers that will not worked out"
 fi
+
