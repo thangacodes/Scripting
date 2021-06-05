@@ -2,7 +2,7 @@
 
 #!/bin/bash
 
-echo "____________________ Script Starts  __________________"
+echo "____________________ Testing __________________"
 
 read -p "Enter the package, you'd like to install on the systems: " PACKAGE
 
@@ -21,5 +21,9 @@ nslookup linkedin.com
 sudo yum list installed | grep $PACKAGE
 
 sleep 5
+
+echo " Going to un-install bind-utils package"
+
+sudo yum remove -y $PACKAGE
 
 echo "____________ Script Ends __________"
