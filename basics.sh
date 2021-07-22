@@ -23,5 +23,5 @@ echo "Value from the command line is $3"
 sleep 2
 
 echo "name of the script is $0"
-echo "number of declared variables is $*"
-echo "number of declared variables is $@"
+echo "number of declared variables are $*"
+echo "number of declared variables are $@"
