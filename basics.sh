@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 echo "This is thangadurai,Murugan"
@@ -21,4 +20,8 @@ echo "Value from the command line is $1"
 echo "Value from the command line is $2"
 echo "Value from the command line is $3"
 
-## Note: It's a just basics on bash
+sleep 2
+
+echo "name of the script is $0"
+echo "number of declared variables is $*"
+echo "number of declared variables is $@"
