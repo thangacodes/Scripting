@@ -22,4 +22,4 @@ v() { echo "Welcome to the Cloud World " ; echo "Todays date is $(date +%F)" ; s
 sleep 1
 v
 
-
+## Note: Here we are defining 'f' 'd' 'u' and 'v' as function name. 
