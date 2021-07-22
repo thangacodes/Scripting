@@ -15,11 +15,14 @@ Linux
 ######### OTHER METHOD TO WRITE UP FUNCTION IN SHELL SCRIPT
 
 #!/bin/bash
-echo "This is going to be show us the use cases of the FUNCTION in Shell Scripting"
-sleep 1
-read -p "Enter your name please: " NAME
-v() { echo "Welcome to the Cloud World " ; echo "Todays date is $(date +%F)" ; sleep 1 ; echo " Number of users logged into the system is : $(who | wc -l)" ; }
-sleep 1
-v
+sample() {
+    read -p "enter your good name please: " NAME
+    echo "Welcome to my site $NAME";
+    echo "Todays date is $(date +%F)";
+    echo "Number of users logged into the system is : $(who | wc -l)"
+}
+echo "This is to demonstrate calling a sample function"
+sample
 
-## Note: Here we are defining 'f' 'd' 'u' and 'v' as function name. 
+
+## Note: Here we are defining 'f' 'd' 'u' and 'sample' are the function names. This is custom functions, you may keep the names as per your convinient
