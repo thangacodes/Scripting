@@ -1,0 +1,24 @@
+
+
+$ df -h > abc.txt
+$ df -h 2> abc.txt
+$ df -h &> abc.txt
+
+> Output redirector
+>> Output redirector But adds content without overriding
+
+abc =123
+echo $abc
+123
+echo The value of abc is "${abc}"
+The value of abc is 123
+echo The value of abc is '${abc}'
+echo The value of abc is ${abc}
+
+For loop:
+--------------
+forloop.sh
+#!/bin/bash
+echo "Print the values $1"
+
+$ for COMP in ansible shellScript terraform AWS Jenkins Pipeline; do sh forloop.sh $COMP; done
