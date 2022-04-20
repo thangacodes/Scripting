@@ -15,6 +15,7 @@ Linux
 ######### OTHER METHOD TO WRITE UP FUNCTION IN SHELL SCRIPT
 
 #!/bin/bash
+echo -e "\e[1;32m ***** This script is executed at *****" $(date '+%Y-%m-%d %H:%M:%S')
 sample() {
     read -p "enter your good name please: " NAME
     echo "Welcome to my site $NAME";
