@@ -1,3 +1,7 @@
-# Shell Scripting
+* Bash Scripting *
 
-This is the repo, where i used to keep my Linux Shell Scripting
+This is my kick start in learning Bash Scripting.
+
+Small contribution learning my stuff related to Linux Bash Scripting.
+
+
