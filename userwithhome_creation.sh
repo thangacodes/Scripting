@@ -2,6 +2,8 @@
 
 echo -e "\e[1;32m ***** This script is executed at *****" $(date '+%Y-%m-%d %H:%M:%S')
 
+echo "script execution time is:"  $(date +'%m/%d/%Y %H:%M:%S')
+
 for u in user{1..5} ; do sudo useradd $u; echo "Password1" | sudo passwd --stdin $u ; done
 
 sleep 6
