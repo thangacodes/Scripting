@@ -3,7 +3,7 @@
 
 # set -x
 
-echo -e "\e[1;32m @@@@@@@@ CSR GENERATION SCRIPT @@@@@@@@@@@@ \e[0m"
+echo -e "\e[1;32m @@@@@@@@ CSR GENERATION SCRIPT @@@@@@@@@@@@ "
 
 echo -e "\e[1;33m @@@@@@ This script is executed at @@@@@@: " $(date '+%Y-%m-%d %H:%M:%S')
 
