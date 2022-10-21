@@ -15,8 +15,6 @@ pipeline {
 			steps{
 			   echo "Deploying into Development"
 			   sh '''
-			      pwd
-				  cd ssl-csr-job
 				  pwd
 				  ls -lrth
 				  sleep 5
