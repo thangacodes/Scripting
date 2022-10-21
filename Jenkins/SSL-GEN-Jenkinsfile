@@ -3,9 +3,10 @@ pipeline {
     parameters {
        string defaultValue: 'SG0314060', description: 'Who is executing the Jenkins Job', name: 'EXECUTIOR_EMP ID'
        choice choices: ['DEV', 'CERT', 'STAGE', 'PROD'], description: 'Select the environment to deploy the resources', name: 'SELECTENV'
+       string defaultValue: 'yes', description: 'SHOULD YOU WANTED TO PROCEED? TYPE: YES OR NO: ?', name: 'ACTION'
     }
 	stages{
-	    stage("INTERNAL CSR GENERATION on DEV"){
+	    stage("SHELL SCRIPT execution on DEV"){
 		    when{
 			  expression{
 			    params.SELECTENV == "DEV"
@@ -14,10 +15,12 @@ pipeline {
 			steps{
 			   echo "Deploying into Development"
 			   sh '''
+			      pwd
+				  cd shell-scripting
 				  pwd
 				  ls -lrth
 				  sleep 5
-				  echo "Going to generate internal csr"
+				  echo "Going to 
 				  sleep 5
 				  sh ssl_csr_gent.sh
 			  '''  
