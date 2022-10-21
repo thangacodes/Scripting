@@ -17,11 +17,11 @@ sleep 5
 
 echo -e "\e[1;36m @@@@@@@@     BEGIN WITH CSR GENERATION     @@@@@@@@@@@ "
 
-read -p " SHOULD YOU WANTED TO PROCEED? TYPE: YES OR NO:" ENTER
+read -p " SHOULD YOU WANTED TO PROCEED? TYPE: YES OR NO:" ACTION
 
-echo $ENTER
+echo $ACTION
 
-if [ "$ENTER" = yes ] ;
+if [ "$ACTION" = yes ] ;
 then
         echo -e "\e[1;32m @@@@@@  GOOD TO GO @@@@@@ "
 else
