@@ -15,11 +15,11 @@ pipeline {
 			   echo "Deploying into Development"
 			   sh '''
 			      pwd
-				  cd shell-scripting
+				  cd CSR-GEN-FOR-SSL/
 				  pwd
 				  ls -lrth
 				  sleep 5
-				  echo "Going to 
+				  echo "Going to generate internal csr"
 				  sleep 5
 				  sh ssl_csr_gent.sh
 			  '''  
