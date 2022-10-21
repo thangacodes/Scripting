@@ -1,0 +1,81 @@
+pipeline {
+    agent any
+    parameters {
+       string defaultValue: 'SG0314060', description: 'Who is executing the Jenkins Job', name: 'EXECUTIOR_EMP ID'
+       choice choices: ['DEV', 'CERT', 'STAGE', 'PROD'], description: 'Select the environment to deploy the resources', name: 'SELECTENV'
+    }
+	stages{
+	    stage("INTERNAL CSR GENERATION on DEV"){
+		    when{
+			  expression{
+			    params.SELECTENV == "DEV"
+			   }
+			}
+			steps{
+			   echo "Deploying into Development"
+			   sh '''
+			      pwd
+				  cd shell-scripting
+				  pwd
+				  ls -lrth
+				  sleep 5
+				  echo "Going to 
+				  sleep 5
+				  sh ssl_csr_gent.sh
+			  '''  
+		         }
+	        }
+		stage("TF execution on CERT"){
+		    when{
+			  expression{
+			    params.SELECTENV == "CERT"
+			   }
+			}
+			steps{
+			   echo "Deploying into Certification"
+			   	sh '''
+				  ls -lrth
+				  pwd
+				  sleep 8
+			          cd Iac_Scripts/vpc_ec2_creation/
+				  pwd
+				  ls -lrth
+				  sleep 3
+				  terraform init
+				  terraform fmt
+				  terraform plan
+				  echo "Going to apply on: ${TF_ACTION}"
+				  ${TF_ACTION}
+			  '''
+		    }
+	}
+	stage("TF execution on STAGE"){
+	    when{
+		   expression{
+		     params.SELECTENV == "STAGE"
+			}
+		   }
+		steps{
+			   echo "Deploying into staging"
+			}
+	}
+	stage("TF execution on PROD"){
+	    when{
+		   expression{
+		     params.SELECTENV == "PROD"
+			}
+		}
+		steps{
+		    echo "Deploying into production"
+		  }
+	    }
+	}
+	post {
+     failure {
+     echo "Job is failure.Sending an email to the SCM team"
+    }
+	success {
+	  echo "Job is succeed.Sending an email to the SCM team"
+    }
+  }
+}
