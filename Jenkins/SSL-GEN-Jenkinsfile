@@ -14,8 +14,6 @@ pipeline {
 			steps{
 			   echo "Deploying into Development"
 			   sh '''
-			      pwd
-				  cd CSR-GEN-FOR-SSL/
 				  pwd
 				  ls -lrth
 				  sleep 5
