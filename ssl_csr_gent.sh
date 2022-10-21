@@ -1,9 +1,8 @@
-
 #!/bin/bash
 
 # set -x
 
-echo -e "\e[1;32m @@@@@@@@ CSR GENERATION SCRIPT @@@@@@@@@@@@ "
+echo -e "\e[1;32m @@@@@@@@ CSR GENERATION SCRIPT @@@@@@@@@@@@ \e[0m"
 
 echo -e "\e[1;33m @@@@@@ This script is executed at @@@@@@: " $(date '+%Y-%m-%d %H:%M:%S')
 
@@ -17,13 +16,11 @@ sleep 5
 
 echo -e "\e[1;36m @@@@@@@@     BEGIN WITH CSR GENERATION     @@@@@@@@@@@ "
 
-read -p " SHOULD YOU WANTED TO PROCEED? TYPE: YES OR NO:" ACTION
+read -p " SHOULD YOU WANTED TO PROCEED? TYPE: YES OR NO:" ENTER
 
-echo $ACTION
+echo $ENTER
 
-sleep 10
-
-if [ "$ACTION" = yes ] ;
+if [ "$ENTER" = yes ] ;
 then
         echo -e "\e[1;32m @@@@@@  GOOD TO GO @@@@@@ "
 else
@@ -44,8 +41,7 @@ openssl req -new -nodes -newkey rsa:2048 -subj "/CN=web04.dev.aws.example.com/C=
 
 openssl req -new -nodes -newkey rsa:2048 -subj "/CN=web05.dev.aws.example.com/C=IN/L=Bangalore/O=Example Softtech corp/OU=ITOPS/ST=Karnataka/emailAddress=TECH_OPS@example.com/subjectAltName=web05.dev.aws.example.com" -keyout web05.key -out web05.csr
 
-
-ls -l | cut -d " " -f9 | grep csr > csr.txt
+ls -l | cut -d " " -f17 | grep csr > csr.txt
 
 sleep 3
 
@@ -59,4 +55,3 @@ done
 echo -e "\e[1;35 @@@@@@  VERIFIED ALL CSR FILES.STATUS showing as OK @@@@@@ "
 
 exit
-
