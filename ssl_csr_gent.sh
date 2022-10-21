@@ -21,6 +21,8 @@ read -p " SHOULD YOU WANTED TO PROCEED? TYPE: YES OR NO:" ACTION
 
 echo $ACTION
 
+sleep 10
+
 if [ "$ACTION" = yes ] ;
 then
         echo -e "\e[1;32m @@@@@@  GOOD TO GO @@@@@@ "
