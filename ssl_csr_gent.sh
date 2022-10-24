@@ -64,10 +64,22 @@ sleep 3
 for i in $(cat csr.txt);
 do
         echo -e "\e[1;34m @@@@@@@ Checking the generated csr files are VALID or NOT @@@@@@@ : $i"
-        # sleep 3
+        sleep 2
         openssl req -text -noout -verify -in $i | grep -i 'status'
 done
 
-echo -e "\e[1;35 @@@@@@  VERIFIED ALL CSR FILES.STATUS showing as OK @@@@@@ "
+echo "Making a zip file with password protected for .csr files"
+
+read -p "Enter the name that you'd like to provide for a zip file:" NAME
+
+zip -re $NAME.zip *.csr
+
+echo "Checking the zip file is done or not"
+
+ls -lrth
+
+sleep 5
+
+echo -e "\e[1;35m VERIFIED ALL CSR FILE STATUS OK. Hence, send out en email to securityops@example.com !!"
 
 exit
