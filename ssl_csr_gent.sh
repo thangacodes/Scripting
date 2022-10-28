@@ -1,6 +1,11 @@
 #!/bin/bash
 
-# set -x     //Debug - It depends if you want to enable remove '#'
+#set -x //Enabling debug
+
+# Variable Declaration:
+BUCKET_NAME=s3://grabtech-space/SSL_CERTS/
+
+echo "$BUCKET_NAME"
 
 echo -e "\e[1;32m @@@@@@@@ CSR GENERATION SCRIPT @@@@@@@@@@@@ "
 
@@ -74,12 +79,24 @@ read -p "Enter the name that you'd like to provide for a zip file:" NAME
 
 zip -re $NAME.zip *.csr
 
-echo "Checking the zip file is done or not"
+echo -e "\e[1;31m Checking the zip file is done or not"
 
 ls -lrth
 
 sleep 5
 
-echo -e "\e[1;35m VERIFIED ALL CSR FILE STATUS OK. Hence, send out en email to securityops@example.com !!"
+echo -e "\e[1;32m Uploading CSR zip file to the S3 bucket that we specified"
+
+aws s3 cp *.zip $BUCKET_NAME
+
+echo -e "\e[1;33m  Checking the .zip file uploaded to the S3 bucket as backup "
+
+aws s3 ls $BUCKET_NAME
+
+sleep 5
+
+echo -e "\e[1;33m Verified the zip file is exist. We are good "
+
+echo -e "\e[1;35m VERIFIED ALL CSR FILE STATUS OK. Hence send out en email to SecOps@example.com"
 
 exit
