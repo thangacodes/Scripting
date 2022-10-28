@@ -59,9 +59,6 @@ read -p "ENTER THE HOSTNAME(FQDN) THAT YOU WANT TO HAVE AN INTERNAL CSR TO BE GE
 
 openssl req -new -nodes -newkey rsa:2048 -subj "/CN=$HOST5/C=IN/L=Bangalore/O=Example Softtech corp/OU=ITOPS/ST=Karnataka/emailAddress=TECH_OPS@example.com/subjectAltName=$HOST5" -keyout $HOST5.key -out $HOST5.csr
 
-
-
-
 ls -l | cut -d " " -f17 | grep csr > csr.txt
 
 sleep 3
