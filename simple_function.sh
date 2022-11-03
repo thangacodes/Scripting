@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Simple Linux Shell script function
+echo -e "\e[1;32m ***** This script is executed at *****" $(date '+%Y-%m-%d %H:%M:%S')
 
 read_inputs()
 {
