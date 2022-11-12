@@ -1,0 +1,65 @@
+pipeline {
+    agent any
+    tools {
+    terraform 'TF_VERSION'
+    }
+    stages {
+        stage('Git checkout') {
+           steps{
+                git branch: 'main', url: 'https://github.com/send2durai/shell-scripting.git'
+				       sh '''
+				          cd Iac_TF
+				          pwd
+				       '''
+            }
+        }
+        stage('TF_FORMAT') {
+            steps{
+                sh '''
+				           cd Iac_TF
+				           terraform fmt
+				        '''
+            }
+        }
+        stage('TF_INIT') {
+            steps{
+                sh '''
+				           cd Iac_TF
+				           terraform init
+			         '''
+            }
+        }
+		stage('Required User Input to be performed on TF_Apply'){
+		    steps{
+			    input 'Do you want to proceed? If yes, please select Proceed or Abort?'
+				}
+		}
+        stage('terraform apply') {
+            steps{
+                sh '''
+				           cd Iac_TF
+				           terraform apply --auto-approve
+		             '''
+            }
+        }
+		stage('Required User Input to be performed on TF_Destroy'){
+		    steps{
+			    input 'Do you want to proceed? If yes, please select Proceed or Abort?'
+			}
+		}
+		stage('terraform destroy') {
+            steps{
+                sh '''
+				           cd Iac_TF
+				           terraform destroy --auto-approve
+		            '''
+            }
+        }
+		stage('Workspace CleanUP'){
+		    steps{
+			    echo "Going to clean Jenkins Job Workspace"
+				cleanWs()
+			}
+		}
+    }    
+}
