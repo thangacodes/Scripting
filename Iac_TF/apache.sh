@@ -87,6 +87,7 @@ sleep 20
 sh /opt/tomcat10/apache-tomcat-10.0.27/bin/startup.sh
 echo -e "\e[1;32m ***** CURL COMMAND EXECUTION *****" $(date '+%Y-%m-%d %H:%M:%S')
 sleep 10
-curl localhost:8080/SampleWebApp
+curl localhost:8080/SampleWebApp/
+curl localhost:8080/SampleWebApp/ >/tmp/curl_out.txt
 sleep 20
 exit
