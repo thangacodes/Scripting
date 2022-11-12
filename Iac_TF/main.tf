@@ -4,7 +4,6 @@ resource "aws_instance" "tomcat_instance" {
     key_name = var.key
     vpc_security_group_ids = ["var.sgp"]
     user_data = file("./apache.sh")
-    tags = {
-        Name = merge(var.taggy, { Name = "Apache-Tomcat-SVR" })
+    tags = merge(var.taggy, { Name = "Apache-Tomcat-SVR" })
     }
 }
