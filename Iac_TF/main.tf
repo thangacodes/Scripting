@@ -5,5 +5,5 @@ resource "aws_instance" "tomcat_instance" {
   vpc_security_group_ids = var.sgp
   subnet_id              = "subnet-e9190a81"
   user_data              = file("apache.sh")
-  tags                   = merge(var.taggy, { Name = "Apache-Tomcat-SVR" })
+  tags                   = merge(var.taggy, { Name = "STATIC-WEBSVR" })
 }
