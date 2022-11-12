@@ -82,6 +82,9 @@ cat /opt/tomcat10/apache-tomcat-10.0.27/webapps/SampleWebApp/index.html >> /tmp/
 sh /opt/tomcat10/apache-tomcat-10.0.27/bin/startup.sh
 sleep 10
 cat /opt/tomcat10/apache-tomcat-10.0.27/logs/catalina.out >> /tmp/re_start_log.txt
+sh /opt/tomcat10/apache-tomcat-10.0.27/bin/shutdown.sh
+sleep 20
+sh /opt/tomcat10/apache-tomcat-10.0.27/bin/startup.sh
 echo -e "\e[1;32m ***** CURL COMMAND EXECUTION *****" $(date '+%Y-%m-%d %H:%M:%S')
 sleep 10
 curl localhost:8080/SampleWebApp
