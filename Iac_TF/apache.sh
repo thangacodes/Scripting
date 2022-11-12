@@ -36,13 +36,14 @@ cd /opt/tomcat10/    # Change directory to the /tomcat10
 cp -R /tmp/apache-tomcat-10.0.27 .
 cp -R /tmp/SampleWebApp.war /opt/tomcat10/apache-tomcat-10.0.27/webapps/
 cd /opt/tomcat10/apache-tomcat-10.0.27/bin/
-./startup.sh  #Tomcat service starting
+sh startup.sh  #Tomcat service starting
 sleep 10
 ls -l /opt/tomcat10/apache-tomcat-10.0.27/webapps/ > /tmp/webapps_files.txt
-ls -l /opt/tomcat10/apache-tomcat-10.0.27/webapps/SampleWebApp > /tmp/SampleWebApp_files.txt
+ls -l /opt/tomcat10/apache-tomcat-10.0.27/webapps/SampleWebApp/ > /tmp/SampleWebApp_files.txt
 cat /opt/tomcat10/apache-tomcat-10.0.27/logs/catalina.out > /tmp/tomcat_log.txt
+sleep 10
 sh /opt/tomcat10/apache-tomcat-10.0.27/bin/shutdown.sh  #Tomcat service stopping
-cd /opt/tomcat10/apache-tomcat-10.0.27/webapps/SampleWebApp
+cd /opt/tomcat10/apache-tomcat-10.0.27/webapps/SampleWebApp/
 rm -rf index.html
 sleep 5
 cat << 'END_HTML' >index.html
@@ -82,9 +83,6 @@ cat /opt/tomcat10/apache-tomcat-10.0.27/webapps/SampleWebApp/index.html >> /tmp/
 sh /opt/tomcat10/apache-tomcat-10.0.27/bin/startup.sh
 sleep 10
 cat /opt/tomcat10/apache-tomcat-10.0.27/logs/catalina.out >> /tmp/re_start_log.txt
-sh /opt/tomcat10/apache-tomcat-10.0.27/bin/shutdown.sh
-sleep 20
-sh /opt/tomcat10/apache-tomcat-10.0.27/bin/startup.sh
 echo -e "\e[1;32m ***** CURL COMMAND EXECUTION *****" $(date '+%Y-%m-%d %H:%M:%S')
 sleep 10
 curl localhost:8080/SampleWebApp/
