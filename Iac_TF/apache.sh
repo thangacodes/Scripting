@@ -1,6 +1,9 @@
 #!/bin/bash
-set -x
+# remove comment if you want to enable debugging
+#set -x
+
 echo -e "\e[1;32m ***** Going to install Apache Tomcat9 on Remote Servers *****" $(date '+%Y-%m-%d %H:%M:%S')
+
 cat <<"EOF"
  ___           _        _ _ _                               _
 |_ _|_ __  ___| |_ __ _| | (_)_ __   __ _    __ _ _ __   __| |
