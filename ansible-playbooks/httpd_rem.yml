@@ -1,0 +1,11 @@
+---
+- name: Removing httpd package
+  hosts: remote
+  become: yes
+  tasks:
+  - name: absent apache
+    yum:
+      name: httpd
+      state: absent
+  - name: Copying the index.html file
+    command: rm -rv /var/www/html/

@@ -1,0 +1,18 @@
+---
+- name: Running 2 tasks in a playbook
+  hosts: remote
+  become: yes
+  tasks:
+  - name: Install apache
+    yum:
+      name: httpd
+      state: present
+  - name: Copying the index.html file
+    copy:
+      src: /home/ec2-user/ansible_practice/index.html
+      dest: /var/www/html/index.html
+
+  - name: start httpd
+    service:
+      name: httpd
+      state: started
