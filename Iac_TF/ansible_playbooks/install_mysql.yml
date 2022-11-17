@@ -1,0 +1,43 @@
+---
+- name: "Installing MySQL on Amazon EC2 machine"
+  hosts: localhost
+  become: yes
+  vars:
+    - mysql_url: https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
+    - mysql_dest: /opt/
+    - greeting: Download the package
+    - site: Mysql binar for linux
+  tasks:
+  - name: "MySql tasks begin now"
+    debug:
+      msg: "{{ greeting }}, to {{ site }}"
+  - name: "Download binary"
+    get_url:
+      url: "{{ mysql_url }}"
+      dest: "{{ mysql_dest }}"
+  - name: "List out the files in /tmp dir"
+    command: ls -lrth /opt/
+    register: lisout
+  - debug: msg="{{ lisout }}"
+
+  - name: "Installation begin"
+    command: rpm -i "{{ mysql_dest }}"/mysql80-community-release-el7-5.noarch.rpm
+
+  - name: "Checking the mysql rpm package"
+    command: rpm -qa | grep -i 'mysql'
+    register: mysql_list
+  - debug: msg="{{ mysql_list }}"
+
+  - name: "Installing additional package"
+    command: yum install mysql-community-server -y
+
+  - name: "starting mysql service"
+    command: systemctl start mysqld
+
+  - name: "Status checking"
+    command: systemctl status mysqld
+
+  - name: "password getting from the log"
+    command: cat /var/log/mysqld.log | grep -i "temporary"
+    register: getting_pass
+  - debug: msg="{{ getting_pass }}"
