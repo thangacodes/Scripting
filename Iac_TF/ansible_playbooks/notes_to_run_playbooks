@@ -1,0 +1,6 @@
+## Please remember this notes as hints
+
+# Following is the command to use run an ansible playbook to Add/Update existing users password.
+# We use variable in playbook that will get encrypted calling extra-vars during ansible-playbook execution.
+
+$ ansible-playbook changepass.yml --extra-vars newpass=123
