@@ -6,3 +6,7 @@
 # We use variable in playbook that will get encrypted calling extra-vars during ansible-playbook execution.
 
 $ ansible-playbook changepass.yml --extra-vars newpass=123
+
+# If you wanted to run a specific task in a playbook, use the following.
+
+$ ansible-playbook tomcat_download.yml --start-at-task 'Creating /tmp/tomcat directory'
