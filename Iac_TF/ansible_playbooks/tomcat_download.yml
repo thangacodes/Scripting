@@ -1,0 +1,19 @@
+---
+- name: Create a Directory and download apache tomcat
+  hosts: localhost
+  tasks:
+    - name: Creating /tmp/tomcat directory
+      file:
+        path: /tmp/tomcat
+        state: directory
+        mode: 0755
+        owner: ec2-user
+        group: ec2-user
+
+    - name: Downloading the apache tar file
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.69/bin/apache-tomcat-9.0.69.tar.gz
+        dest: /tmp/tomcat
+        mode: 0755
+        owner: ec2-user
+        group: ec2-user
