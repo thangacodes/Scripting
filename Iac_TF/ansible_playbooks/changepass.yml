@@ -1,0 +1,10 @@
+---
+- name: Add or Update user password
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Change "george" password
+      user:
+        name: george
+        update_password: always
+        password: "{{ newpass|password_hash('sha512') }}"
