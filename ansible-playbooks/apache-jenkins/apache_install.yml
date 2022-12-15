@@ -11,7 +11,7 @@
     command: systemctl start httpd
   - name: Copying the index.html file
     copy:
-      src: /home/ec2-user/ansible_practice/testing/index.html
+      src: index.html
       dest: /var/www/html/index.html
     register: cp_out
   - debug: msg="{{ cp_out }}"
