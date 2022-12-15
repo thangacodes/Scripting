@@ -1,0 +1,20 @@
+---
+- name: Install and configure static web server
+  hosts: dev
+  become: yes
+  tasks:
+  - name: First installing httpd binary to the remote
+    command: yum install -y httpd
+  - name: Enable the httpd service
+    command: systemctl enable httpd
+  - name: Start the service
+    command: systemctl start httpd
+  - name: Copying the index.html file
+    copy:
+      src: /home/ec2-user/ansible_practice/testing/index.html
+      dest: /var/www/html/index.html
+    register: cp_out
+  - debug: msg="{{ cp_out }}"
+
+  - name: Restart the service
+    command: systemctl restart httpd

@@ -1,0 +1,12 @@
+
+---
+- name: Install and configure static web server
+  hosts: dev
+  become: yes
+  tasks:
+  - name: First installing httpd binary to the remote
+    command: yum remove -y httpd
+  - name: Removing the index.html file
+    command: rm -rf /var/www/html/index.html
+    register: rm_out
+  - debug: msg="{{ rm_out }}"
