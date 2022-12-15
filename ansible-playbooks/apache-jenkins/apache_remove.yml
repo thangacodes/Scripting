@@ -1,9 +1,12 @@
-
 ---
 - name: Install and configure static web server
   hosts: dev
   become: yes
   tasks:
+  - name: Stopping the service
+    command: systemctl stop httpd
+    register: stop_out
+  - debug: msg="{{ stop_out }}"
   - name: First installing httpd binary to the remote
     command: yum remove -y httpd
   - name: Removing the index.html file
