@@ -1,21 +1,24 @@
-# How to install Jenkins on CentOS 7 using shell script
-
-
 #!/bin/bash
 echo -e "\e[1;32m ***** This script is executed at *****" $(date '+%Y-%m-%d %H:%M:%S')
-sudo yum install epel-release -y
-sudo yum install java -y
-sudo yum install -y wget
+echo -e "\e[1;33m ***** Checking Java Version, before jenkins installation proceedings *****"
+JAVA='java -version'
+STATUS='sudo systemctl status jenkins'
+SYMLINK='sudo systemctl enable jenkins'
+START='sudo systemctl start jenkins'
+echo $JAVA
+echo $STATUS
+echo $SYMLINK
+echo $START
+$JAVA
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo --no-check-certificate
 sudo rpm --import http://pkg.jenkins.io/redhat-stable/jenkins.io.key
-sudo yum install jenkins -y
-sudo vi /etc/sysconfig/jenkins
-sleep 2
-echo "Going to change the custom port number in jenkins file"
-sudo sed -i 's/8080/8090/g' /etc/sysconfig/jenkins
-sudo cat /etc/sysconfig/jenkins | grep '80'
-sleep 2
-sudo systemctl status jenkins
-sudo systemctl enable jenkins
-sudo systemctl start jenkins
-
+sleep 3
+INSTALL='sudo yum install jenkins -y'
+echo $INSTALL
+echo -e "\e[1;34m ***** Jenkins installation begins *****"
+$INSTALL
+sleep 5
+echo -e "\e[1;35m ***** Proceedings on jenkins status,symlink,start ***********"
+$STATUS
+$SYMLINK
+$START
