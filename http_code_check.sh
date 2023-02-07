@@ -1,12 +1,18 @@
-#!/bin/bash
+#!/bin/sh
 
-read -p "Enter the http status code that you wanted to check:" COUT
+#set -x  # Enabling Debugging
+read -p "Enter the URL that you wanted to test:" URL
+echo $URL
+echo $URL
+echo "Script is to check client response code on $URL"
 
-echo $COUT
-sleep 5
-if [ "$COUT" = 200 ];
+CURL=`curl --insecure -I $URL -o /dev/null -w '%{http_code}\n' -s`
+
+echo "http client response code on node: $(hostname)": $CURL
+
+if [ "$CURL" = 200 ]
 then
-     echo -e "\e[1;33m HC is OK and HTTP_STATUS CODE IS 200"
+     echo "health check looks good and hc status code is 200"
 else
-     echo -e "\e[1;34m HC is not OK and HTTP_STATUS CODE also different"
+     echo "health check is failing and the status code is different"
 fi
