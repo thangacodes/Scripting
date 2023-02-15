@@ -11,7 +11,13 @@ CURL=`curl --insecure -I $URL -o /dev/null -w '%{http_code}\n' -s`
 echo "http client response code on node: $(hostname)": $CURL
 if [ "$CURL" = 200 ]
 then
-     echo "health check looks good and hc status code is 200"
+       echo -e "\e[1;31m ********** HEALTH CHECK LOOKS GOOD AND THE CLIENT HTTP STATUS CODE IS: 200 ***************"
+       echo -e "\e[1;32m ********** HEALTH CHECK LOOKS GOOD AND THE CLIENT HTTP STATUS CODE IS: 200 ***************"
+       echo -e "\e[1;33m ********** HEALTH CHECK LOOKS GOOD AND THE CLIENT HTTP STATUS CODE IS: 200 ***************"
+       echo -e "\e[1;34m ********** HEALTH CHECK LOOKS GOOD AND THE CLIENT HTTP STATUS CODE IS: 200 ***************"
+       echo -e "\e[1;35m ********** HEALTH CHECK LOOKS GOOD AND THE CLIENT HTTP STATUS CODE IS: 200 ***************"
+       echo -e "\e[1;36m ********** HEALTH CHECK LOOKS GOOD AND THE CLIENT HTTP STATUS CODE IS: 200 ***************"
+       echo -e "\e[1;37m ********** HEALTH CHECK LOOKS GOOD AND THE CLIENT HTTP STATUS CODE IS: 200 ***************"
 else
-     echo "health check is failing and the status code is different"
+       echo -e "\e[1;31m ********** HEALTH CHECK IS FAILING AND THE CLIENT HTTP STATUS CODE IS DIFFERENT **********"
 fi
