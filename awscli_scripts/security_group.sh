@@ -19,16 +19,9 @@ echo "******************** LETS PROCEED WITH AUTOMATION OF AWSCLI WITH BASH SCRI
 aws ec2 authorize-security-group-ingress --group-id $SECGP --ip-permissions IpProtocol=tcp,FromPort=$FROMPORT,ToPort=$TOPORT,IpRanges="[{CidrIp=$IPCIDR,Description='$DESC'}]"
 echo "Describing a security group:" $SECGP
 aws ec2 describe-security-groups --group-ids $SECGP --region $REGION
-echo -e "\e[1;31m ***** @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ***** "
-echo -e "\e[1;32m ***** @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ***** "
-echo -e "\e[1;33m ***** @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ***** "
-echo -e "\e[1;34m ***** @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ***** "
-echo -e "\e[1;35m ***** @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ***** "
-echo -e "\e[1;36m ***** @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ***** "
-echo -e "\e[1;37m ***** @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ***** "
 read -p "Are we good to proceed in revoking the SG rules:" ENTER
-echo -e "\e[1;37m ***** You've feed the value as: *****" $ENTER
-echo -e "\e[1;34m ***** Before proceeding with revoking access, there will be a small break: *****"
+echo -e "\e[1;33m ***** You've feed the value as: *****" $ENTER
+echo -e "\e[1;32m ***** Before proceeding with revoking access, there will be a small break: *****"
 sleep 5
 echo -e "\e[1;36m ***** Revoking security_group_rules in progress: *****"
 aws ec2 revoke-security-group-ingress --group-id $SECGP --ip-permissions IpProtocol=tcp,FromPort=$FROMPORT,ToPort=$TOPORT,IpRanges="[{CidrIp=$IPCIDR,Description='$DESC'}]"
