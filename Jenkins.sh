@@ -1,5 +1,6 @@
 #!/bin/bash
 echo -e "\e[1;32m ***** This script is executed at *****" $(date '+%Y-%m-%d %H:%M:%S')
+echo -e "\e[1;34m ***** This script is executed at *****" $(date '+%Y.%m.%d %H:%M:%S')
 echo -e "\e[1;33m ***** Checking Java Version, before jenkins installation proceedings *****"
 JAVA='java -version'
 STATUS='sudo systemctl status jenkins'
