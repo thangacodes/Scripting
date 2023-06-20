@@ -7,11 +7,11 @@ State=Karnataka
 zip=560043
 
 
-echo "${Name}"
-echo "${Street}"
-echo "${City}"
-echo "${State}"
-echo "${zip}"
+#echo "${Name}"
+#echo "${Street}"
+#echo "${City}"
+#echo "${State}"
+#echo "${zip}"
 
 echo $1
 echo $2
