@@ -47,10 +47,17 @@ pipeline {
                 echo 'Terraform code in progress'
             }
         }
-        stage('plan'){
+        stage('tf_plan'){
             steps{
                 script {
                     groovy.tfplan()
+                }
+            }
+        }
+        stage('tf_apply'){
+            steps{
+                script {
+                    groovy.tfapply()
                 }
             }
         }
