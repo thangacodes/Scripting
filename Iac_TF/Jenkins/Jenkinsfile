@@ -14,7 +14,7 @@ pipeline {
                 script{
                     pwd
                     sleep(5)
-                    groovy = load "Jenkins/tf.groovy"
+                    groovy = load "Iac_TF/Jenkins/tf.groovy"
                 }
             }
         }
