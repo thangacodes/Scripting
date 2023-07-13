@@ -61,6 +61,13 @@ pipeline {
                 }
             }
         }
+        stage('tf_destroy'){
+            steps{
+                script{
+                    groovy.tfdestroy()
+                }
+            }
+        }
         stage('Workspace Cleanup'){
             steps{
                 sh '''
