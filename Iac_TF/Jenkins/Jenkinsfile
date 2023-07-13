@@ -46,7 +46,7 @@ pipeline {
                 }
             }
         }
-        stage('User Input'){
+        stage('Input_before_apply'){
             input{
                 message "Are we good to apply? Say yes or no?"
             }
@@ -61,7 +61,7 @@ pipeline {
                 }
             }
         }
-        stage('User Input'){
+        stage('Input_before_destroy'){
             input{
                 message "Are we good to destroy? Say yes or no?"
             }
