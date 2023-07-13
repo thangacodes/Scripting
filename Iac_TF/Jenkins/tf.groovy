@@ -2,7 +2,7 @@ def tfinit() {
     echo 'terraform init in progress...'
     sh '''
          pwd
-         cd ../ami_data/
+         cd Iac_TF/ami_data/
          pwd
          ls -lrt
          terraform init
@@ -11,7 +11,7 @@ def tfinit() {
 def tffmt() {
     echo 'terraform format in progress...'
     sh '''
-         cd ../ami_data/
+         cd Iac_TF/ami_data/
          pwd
          terraform fmt
       '''
@@ -20,7 +20,7 @@ def tffmt() {
 def tfvalidate() {
     echo 'terraform validate in progress...'
     sh '''
-          cd ../ami_data/
+          cd Iac_TF/ami_data/
           pwd
           terraform validate
       '''
@@ -29,7 +29,7 @@ def tfvalidate() {
 def tfplan() {
     echo 'terraform plan in progress...'
     sh '''
-         cd ../ami_data/
+         cd Iac_TF/ami_data/
          pwd
          terraform plan
       '''
