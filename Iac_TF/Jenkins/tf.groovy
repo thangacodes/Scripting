@@ -41,6 +41,14 @@ def tfapply() {
          pwd
          terraform apply --auto-approve
       '''
-} 
+}
+def tfdestroy() {
+    echo 'terraform destroy in progress...'
+    sh '''
+         cd Iac_TF/ami_data/
+         pwd
+         terraform destroy --auto-approve
+      '''
+}
 
 return this
