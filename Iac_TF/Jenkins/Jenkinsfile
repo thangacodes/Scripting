@@ -39,19 +39,16 @@ pipeline {
                 }
             }
         }
-        stage('User Input'){
-            input{
-                message "should we deploy the tf project? Say yes or no?"
-            }
-            steps{
-                echo 'Terraform code in progress'
-            }
-        }
         stage('tf_plan'){
             steps{
                 script {
                     groovy.tfplan()
                 }
+            }
+        }
+        stage('User Input'){
+            input{
+                message "Are we good to apply? Say yes or no?"
             }
         }
         stage('tf_apply'){
@@ -61,19 +58,16 @@ pipeline {
                 }
             }
         }
+        stage('User Input'){
+            input{
+                message "Are we good to destroy? Say yes or no?"
+            }
+        }
         stage('tf_destroy'){
             steps{
                 script{
                     groovy.tfdestroy()
                 }
-            }
-        }
-        stage('Workspace Cleanup'){
-            steps{
-                sh '''
-                   echo "Cleaning the Jenkins Workspace"
-                '''
-                cleanWs()
             }
         }
     }
