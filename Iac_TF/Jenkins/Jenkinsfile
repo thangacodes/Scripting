@@ -1,0 +1,66 @@
+def groovy
+
+pipeline {
+    agent any
+    stages{
+        stage('code clone'){
+            steps{
+                echo 'Git repo cloning in progress..'
+                git branch: 'main', url: 'https://github.com/send2durai/terraform_sharelibs.git'
+            }
+        }
+        stage('loading groovy'){
+            steps{
+                script{
+                    pwd
+                    sleep(5)
+                    groovy = load "Jenkins/tf.groovy"
+                }
+            }
+        }
+        stage('init'){
+            steps{
+                script{
+                    groovy.tfinit()
+                }
+            }
+        }
+        stage('fmt'){
+            steps{
+                script {
+                    groovy.tffmt()
+                }
+            }
+        }
+        stage('validate'){
+            steps{
+                script {
+                    groovy.tfvalidate()
+                }
+            }
+        }
+        stage('User Input'){
+            input{
+                message "should we deploy the tf project? Say yes or no?"
+            }
+            steps{
+                echo 'Terraform code in progress'
+            }
+        }
+        stage('plan'){
+            steps{
+                script {
+                    groovy.tfplan()
+                }
+            }
+        }
+        stage('Workspace Cleanup'){
+            steps{
+                sh '''
+                   echo "Cleaning the Jenkins Workspace"
+                '''
+                cleanWs()
+            }
+        }
+    }
+}
