@@ -1,8 +1,10 @@
 def tfinit() {
     echo 'terraform init in progress...'
     sh '''
+         pwd
          cd ../ami_data/
          pwd
+         ls -lrt
          terraform init
        '''      
 } 
