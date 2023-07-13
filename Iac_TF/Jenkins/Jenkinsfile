@@ -6,7 +6,7 @@ pipeline {
         stage('code clone'){
             steps{
                 echo 'Git repo cloning in progress..'
-                git branch: 'main', url: 'https://github.com/send2durai/terraform_sharelibs.git'
+                git branch: 'main', url: 'https://github.com/thangacodes/shell-scripting.git'
             }
         }
         stage('loading groovy'){
