@@ -33,5 +33,14 @@ def tfplan() {
          pwd
          terraform plan
       '''
+}
+def tfapply() {
+    echo 'terraform apply in progress...'
+    sh '''
+         cd Iac_TF/ami_data/
+         pwd
+         terraform apply --auto-approve
+      '''
 } 
+
 return this
