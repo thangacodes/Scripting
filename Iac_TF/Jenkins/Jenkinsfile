@@ -50,6 +50,9 @@ pipeline {
             input{
                 message "Are we good to apply? Say yes or no?"
             }
+            steps{
+                echo 'Next Terraform apply will begin shortly...'
+            }
         }
         stage('tf_apply'){
             steps{
@@ -61,6 +64,9 @@ pipeline {
         stage('User Input'){
             input{
                 message "Are we good to destroy? Say yes or no?"
+            }
+            steps{
+                echo 'Next Terraform destroy will begin shortly...'
             }
         }
         stage('tf_destroy'){
