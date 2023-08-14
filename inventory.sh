@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo -e "\033[94m Getting system information"
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
 echo "The date is:" ${DATE}
