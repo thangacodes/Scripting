@@ -11,3 +11,6 @@ echo "Total value in an array is:" ${myarray[*]}
 
 echo "Length of the array value is: ${#myarray[*]}"
 
+# How to get index values of 2-3 in an array.
+
+echo "Index value finding for array 2-3:" ${myarray[*]:2:3}
