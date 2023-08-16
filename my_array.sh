@@ -7,3 +7,7 @@ echo "Value in 2nd index is:" ${myarray[1]}
 echo "Value in 3rd index is:" ${myarray[2]}
 echo "Value in 4th index is:" ${myarray[3]}
 
+echo "Total value in an array is:" ${myarray[*]}
+
+echo "Length of the array value is: ${#myarray[*]}"
+
