@@ -1,7 +1,5 @@
-* Bash Scripting *
+Bash and Shell Scripting:
 
-This is my kick start in learning Bash Scripting.
-
-Small contribution learning my stuff related to Linux Bash Scripting.
+Here is my kick start in learning Bash Script. Trying to learn all I can about Linux Scripting...
 
 
