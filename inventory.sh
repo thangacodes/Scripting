@@ -13,6 +13,7 @@ echo -e "\033[93m The server hostname is:" ${HOSTNAME}
 
 IP_ADDRESS=$(hostname -i)
 echo -e "\033[94m IP Address of the server is:" ${IP_ADDRESS}
+
 OS_NAME=$(uname)
 echo -e "\033[95m OS version of the server is:" ${OS_NAME}
 
