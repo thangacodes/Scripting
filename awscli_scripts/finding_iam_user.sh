@@ -1,19 +1,14 @@
 #!/bin/bash
+
 read -p "Enter username please:" IAM_USER
-USER_CNT=$(aws iam list-users | grep -w "${IAM_USER}" | grep -v grep | wc -l)
 
-echo ${USER_CNT}
+echo "You've entered IAM user is:" ${IAM_USER}
 
-if [[ ${USER_CNT} == 0 ]];
+if [[ ${IAM_USER} == ondot ]];
 then
-   echo "${IAM_USER} is not a valid IAM User"
-   echo "Please try again with Valid IAM User"
-elif
-   [[ ${IAM_USER} == 1 ]];
-then
-AVAIL=$(aws iam list-groups-for-user --user-name ${IAM_USER} | awk -F group/ '{print $2}'| awk '{print $1}')
-echo $AVAIL
-
-echo "This USER ${IAM_USER} is exist in AWS :"
+        USER=$(aws iam list-users | grep -w '${IAM_USER}' | awk 'NR==1 {print $2}')
+        echo "User $USER is exist in AWS account.."
+else
+        echo "Unable to find the user in IAM. Please try with the valid user..."
 fi
 
