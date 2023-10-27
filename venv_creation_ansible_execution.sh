@@ -90,12 +90,12 @@ prYellow
 echo "Jira package Is exist or not"
 pip list | grep jira
 prBlue
-echo "Jira package installation in progress..."
+echo "Jira package installation in progress...."
 pip install jira
 prPink
 echo "greping Jira package"
 pip list | grep jira
 prRed
-echo "Deactivating Venv in this machine ********"
+echo "Deactivating Venv in this machine...."
 deactivate
 exit
