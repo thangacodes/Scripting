@@ -12,6 +12,13 @@ prGreen(){
 prYellow(){
   echo -e "\033[93m$1..."
 }
+prBlue(){
+  echo -e "\033[94m$1..."
+}
+prPink(){
+  echo -e "\033[95m$1..."
+}
+
 prRed
   echo "The script executed at:" $(get_date)
 
@@ -21,14 +28,14 @@ prGreen
 prYellow
 echo "Checking pip verson..."
 pip --version
-prRed
+prBlue
 echo "Virtual Environment creation in progres..."
 python3 -m venv project-git
 python3 -m venv project-jira
-prGreen
+prPink
 echo "Activating Venv in this machine..."
 source project-jira/bin/activate
-prYellow
+prRed
 echo "On the fly writing a script..."
 cat << EOF > hello.py
 print("This is called advance concept in Python function. We use input, return, output in Python Functions...")
@@ -49,20 +56,21 @@ print(f"The multiplication of two number is:", multipl(5,10))
 EOF
 sleep 2
 ls -lrt
-prRed
+prGreen
 echo "Executing python script..."
 ls -lrt
 python3 hello.py
-prGreen
+prYellow
 echo "Jira package Is exist or not"
 pip list | grep jira
-prYellow
+prBlue
 echo "Jira package installation in progress..."
 pip install jira
-prGreen
+prPink
 echo "greping Jira package"
 pip list | grep jira
-prYellow
-echo "Deactivating Venv in this machine...."
+prRed
+echo "Deactivating Venv in this machine ********"
 deactivate
 exit
+
