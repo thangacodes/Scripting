@@ -63,6 +63,6 @@ prGreen
 echo "greping Jira package"
 pip list | grep jira
 prYellow
-echo "Deactivating Venv in this machine ********"
+echo "Deactivating Venv in this machine...."
 deactivate
 exit
