@@ -1,7 +1,7 @@
 #!/bin/bash
 
 name=$1
-complementry=$2
+complementary=$2
 read -p "Please enter your name :" name
 read -p "Please precious your complementry :" complementry
 echo "Good Morning $name!!"
