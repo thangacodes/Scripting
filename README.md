@@ -1,7 +1,8 @@
-Bash and Shell Scripting:
-Shell Scripting is an open-source operating system.
+Bash/Shell Scripting:
 
-Here is my kick start in learning Bash Script. Trying to learn all I can about Linux Scripting.!!
+* In shell scripting, a list of commands is written into a text file that instructs applications to carry out specific tasks.
+
+* Here I keep all of my shell scripts for performing certain tasks that I perform on a daily basis.
 
 
 
