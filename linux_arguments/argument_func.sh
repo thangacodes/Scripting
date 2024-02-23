@@ -11,5 +11,5 @@ echo "Working place is: $3"
 
 whoareyou $1 $2    ##Calling function here
 
-### when you execute this script, you should be using as arguments_fun.sh "john david" "harur"
+### when you execute this script, you should be using as argument_func.sh "john david" "harur"
 
