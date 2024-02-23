@@ -1,0 +1,50 @@
+
+pipeline {
+    agent any
+    stages {
+        stage('Terraform version') {
+            steps {
+                echo 'Terraform version checking'
+                sh 'terraform --version'
+                sh 'python --version'
+            }
+        }
+        stage('Ansible version'){
+            steps{
+                echo 'Checking Ansible installed version'
+                sh '''
+                    echo 'Going to check Ansible version that has been built in the bakery ami'
+                    ansible --version
+                    which python
+                '''
+            }
+        }
+        stage('Python Script execution'){
+            steps{
+                echo 'Writing up a multi-line string to a shell variable...'
+                sh '''
+				      cat <<  EOF >> hello.py
+                      #!/usr/bin/python
+                      import time
+                      import os
+                      a ="Python is very friendly programming"
+                      print(f"The value of a is {a}")
+                    EOF
+                    echo 'sleeping for a while..'
+                    sleep 5
+                    echo 'Checking the files..'
+                    ls -lrt
+                    cat hello.py
+                '''
+                   sh 'hello.py'
+                }
+		}
+		stage('Workspace Cleanup'){
+		    steps{
+				echo "Going to cleanup pipeline job workspace"
+				  cleanWs()
+                }
+		}
+    }
+}
+	
