@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+        environment {
+        S3_BUCKETNAME="s3://gitops-demo-bucket-tf/"
+        FILE_NAME="/home/ec2-user/metainfo.txt"
+    }
+    stages {
+        stage('Git_Cloning') { 
+            steps { 
+                git branch: 'main', url:'https://github.com/thangacodes/shell-scripting.git'
+                sh '''
+                   cd shell-scripting/awscli_scripts/
+                   pwd
+                  ls -lrt
+                '''
+            }
+        }
+        stage('task_execution') {
+            steps {
+                sh '''
+                   cd shell-scripting/awscli_scripts/
+                   chmod +x finding_instance_metainfo.sh
+                   sh finding_instance_metainfo.sh
+                '''
+            }
+        }
+        stage('files_list') { 
+            steps { 
+                sh '''
+                    aws s3 ls ${S3_BUCKETNAME}
+                    ls -lrth
+                '''
+                }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
