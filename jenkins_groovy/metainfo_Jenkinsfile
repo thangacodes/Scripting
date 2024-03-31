@@ -9,7 +9,7 @@ pipeline {
             steps { 
                 git branch: 'main', url:'https://github.com/thangacodes/shell-scripting.git'
                 sh '''
-                   cd shell-scripting/awscli_scripts/
+                   cd metainfo/shell-scripting/awscli_scripts/
                    pwd
                   ls -lrt
                 '''
