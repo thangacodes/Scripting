@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Git_Checkout') { 
             steps { 
-                git clone: 'main', url:'https://github.com/thangacodes/shell-scripting.git'
+                sh 'git clone https://github.com/thangacodes/shell-scripting.git'
                 sh '''
                    pwd
                    cd shell-scripting/awscli_scripts/
