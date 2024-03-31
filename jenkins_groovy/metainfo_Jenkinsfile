@@ -5,11 +5,12 @@ pipeline {
         FILE_NAME="meta_datainfo.txt"
     }
     stages {
-        stage('Git_Cloning') { 
+        stage('Git_Checkout') { 
             steps { 
                 git branch: 'main', url:'https://github.com/thangacodes/shell-scripting.git'
                 sh '''
-                   cd metainfo/shell-scripting/awscli_scripts/
+                   pwd
+                   cd shell-scripting/awscli_scripts/
                    pwd
                   ls -lrt
                 '''
