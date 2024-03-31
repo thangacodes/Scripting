@@ -46,6 +46,8 @@ pipeline {
             echo "Post deletion, checking once again if the file is deleted or not.."
             aws s3 ls $S3_BUCKET_NAME
             '''
+		}
+	}
     }
     post {
         always {
