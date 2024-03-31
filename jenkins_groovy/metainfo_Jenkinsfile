@@ -21,6 +21,15 @@ pipeline {
                   echo "The current build number is ${env.BUILD_NUMBER}"
                   echo "The static value of S3_Bucket var is: ${env.S3_BUCKETNAME}"
                   echo "The static value of FILE_NAME var is: ${env.FILE_NAME}"
+                  echo "The current build number is: ${env.BUILD_NUMBER}"
+		  echo "The current build_id number is: ${env.BUILD_ID}"
+ 		  echo "The current build code repo branch is: ${env.BRANCH_NAME}"
+		  echo "The Jenkins HOME DIR is: ${env.JENKINS_HOME}"
+                  echo "The Jenkins URL is: ${env.JENKINS_URL}"
+                  echo "The BUILD URL is: ${env.BUILD_URL}"
+                  echo "The JOB_URL is: ${env.JOB_URL}"
+                  echo "The GIT_URL is: ${env.GIT_URL}"
+                  echo "The GIT_AUTHOR_NAME is: ${env.GIT_AUTHOR_NAME}"
                 }
            }
         stage('task_execution') {
