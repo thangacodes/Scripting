@@ -41,7 +41,7 @@ pipeline {
         stage('FILE_DELETION'){
           steps{
             sh '''
-            aws s3 rm $S3_BUCKET_NAME $FILE_NAME
+            aws s3 rm $S3_BUCKETNAME $FILE_NAME
             sleep 5
             echo "Post deletion, checking once again if the file is deleted or not.."
             aws s3 ls $S3_BUCKET_NAME
