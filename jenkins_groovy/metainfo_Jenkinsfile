@@ -2,7 +2,7 @@ pipeline {
     agent any
         environment {
         S3_BUCKETNAME="s3://gitops-demo-bucket-tf/"
-        FILE_NAME="/home/ec2-user/metainfo.txt"
+        FILE_NAME="meta_datainfo.txt"
     }
     stages {
         stage('Git_Cloning') { 
