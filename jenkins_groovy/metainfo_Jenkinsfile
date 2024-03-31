@@ -18,10 +18,9 @@ pipeline {
         }
         stage('ENV_VARS_CHECK'){
            steps{
-               sh '''
+                  echo "The current build number is ${env.BUILD_NUMBER}"
                   echo "The static value of S3_Bucket var is: ${env.S3_BUCKETNAME}"
                   echo "The static value of FILE_NAME var is: ${env.FILE_NAME}"
-                  '''
                 }
            }
         stage('task_execution') {
