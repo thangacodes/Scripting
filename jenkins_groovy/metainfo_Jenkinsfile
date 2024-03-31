@@ -33,6 +33,19 @@ pipeline {
                 '''
                 }
         }
+        stage('USER INPUT'){
+		    steps{
+			    input 'Do you want to delete the file? If yes, please select Proceed or Abort?'
+			}
+		}
+        stage('FILE_DELETION'){
+          steps{
+            sh '''
+            aws s3 rm $S3_BUCKET_NAME/$FILE_NAME
+            sleep 5
+            echo "Post deletion, checking once again if the file is deleted or not.."
+            aws s3 ls $S3_BUCKET_NAME
+            '''
     }
     post {
         always {
