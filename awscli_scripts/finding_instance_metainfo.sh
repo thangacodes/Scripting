@@ -21,11 +21,11 @@ for ID in $INSID; do
     echo "Instance Public IP is: $PUBLIC_IP"
     echo "Instance Private IP is: $PRIVATE_IP"
     echo "Instance Security Group is: $SECURITY_GROUP"
-done   > /home/ec2-user/meta_datainfo.txt
+done   > meta_datainfo.txt
 
 ## STATIC VARIABLE [Since, we know the Bucket_name and file_output]
 S3_BUCKET_NAME="s3://gitops-demo-bucket-tf"
-FILE_NAME="/home/ec2-user/meta_datainfo.txt"
+FILE_NAME="meta_datainfo.txt"
 
 ## Condition checking, if "meta_datainfo.txt" file is exist then it will get upload to S3_bucket.."
 if [[ $? == 0 ]];
