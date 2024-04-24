@@ -21,22 +21,21 @@ for ID in $INSID; do
     echo "Instance Public IP is: $PUBLIC_IP"
     echo "Instance Private IP is: $PRIVATE_IP"
     echo "Instance Security Group is: $SECURITY_GROUP"
-done   > /home/ec2-user/metainfo.txt
-sleep 3
+done   > meta_datainfo.txt
+
+## STATIC VARIABLE [Since, we know the Bucket_name and file_output]
 S3_BUCKET_NAME="s3://gitops-demo-bucket-tf"
-FILE_NAME="/home/ec2-user/metainfo.txt"
+FILE_NAME="meta_datainfo.txt"
 
-if [[ $FILE_NAME == "/home/ec2-user/metainfo.txt" ]];
+## Condition checking, if "meta_datainfo.txt" file is exist then it will get upload to S3_bucket.."
+if [[ $? == 0 ]];
 then
-        echo "$FILE_NAME is exist on the path.."
+        echo "$FILE_NAME is exist on the path..."
 else
-        echo "$FILE_NAME is doesn't exist on the path.."
+        echo "$FILE_NAME is doesn't exist on the path..."
 fi
-
-echo "Going to upload the files to s3_bucket.."
-
+## meta_datainfo.txt file is uploading to the S3-Bucket
+echo "Going to upload the files to s3_bucket..."
 aws s3 cp $FILE_NAME $S3_BUCKET_NAME
-
 aws s3 ls $S3_BUCKET_NAME
-
 exit
