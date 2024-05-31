@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Fetching worker node details') {
+            steps {
+                withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'anvi.k8s.local', contextName: '', credentialsId: 'SECRET_TOKEN', namespace: 'default', serverUrl: '']]) {
+            }
+            echo 'Finding out worker nodes details'
+            sh '''
+                kubectl get nodes
+            '''
+            }
+        }
+    }
+}
+
