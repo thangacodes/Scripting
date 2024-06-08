@@ -1,42 +1,32 @@
 #!/bin/bash
 
-encrypt(){
+encrypt() {
+    echo "Script executed at: $(date '+%Y-%m-%d %H:%M:%S')"
 
-echo "Script executed at: " $(date '+%Y-%m-%d %H:%M:%S')
+    read -p "Enter the word that you want to convert to encrypted format: " WORD
 
-read -p "Enter the word that you wanted to convert as encryption: " WORD
+    echo "You entered: $WORD"
+    echo "Converting the word \"$WORD\" to encrypted format..."
 
-echo "you entered word is: " $WORD
+    ENCRYPTED_WORD=$(echo "$WORD" | base64)
 
-echo "script is going to convert the word "$WORD" to encrypted format.."
-
-ENCRYPT="$(echo $WORD | base64)"
-
-echo "Encrypted format value of "$WORD" is:" $ENCRYPT
-
-echo "The encrypted value of "$WORD" is:" $ENCRYPT
-
+    echo "Encrypted format value of \"$WORD\" is: $ENCRYPTED_WORD"
 }
 
-pause(){
-
-echo "two seconds pause the script.."
-sleep 2
-
+pause() {
+    echo "Pausing the script for two seconds..."
+    sleep 2
 }
 
-decrypt(){
+decrypt() {
+    echo "Decrypting from encrypted value..."
 
-echo "Going to DECRYPT from ENCRYPTED value.."
+    DECRYPTED_WORD=$(echo "$ENCRYPTED_WORD" | base64 -d)
 
-DECRYPTION="$(echo $ENCRYPT | base64 -d)"
-
-echo "The decrypted value of $ENCRYPT is:" $DECRYPTION
-
+    echo "The decrypted value of \"$ENCRYPTED_WORD\" is: $DECRYPTED_WORD"
 }
 
-## Calling functions
-
+# Function calls to execute the tasks
 encrypt
 pause
 decrypt
