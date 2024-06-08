@@ -1,0 +1,21 @@
+2023-06-16 11:31:59 gitops-demo-bucket-tf
+2021-01-14 10:23:44 gitops-demo-bucket-bf
+2022-02-10 12:03:32 gitops-demo-bucket-af
+2020-03-08 13:08:14 gitops-demo-bucket-cf
+
+
+## if you fetch '3' row from a text file, use the following command,
+
+# cat dummy.txt | awk '{print $3}'
+
+## if you fetch '2' and '3' row from a text file, use the following command,
+
+# cat dummy.txt | awk '{print $1,$2}'
+
+## if you fetch '1' row from a text file, use the following command,
+
+# cat dummy.txt | awk '{print $1}'
+
+
+
+
