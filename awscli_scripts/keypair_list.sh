@@ -1,16 +1,18 @@
 #!/bin/bash
 
-# List EC2 key pairs and extract the key names
+## Fetching the region detail
+
+REGION=$(aws ec2 describe-availability-zones --output text --query 'AvailabilityZones[0].[RegionName]')
+
+## List EC2 key pairs and extract the key names
 
 keynames=$(aws ec2 describe-key-pairs --query 'KeyPairs[*].KeyName' --output text)
 
-echo "EC2 Keypair Names:"
+## Loop through each key name and print it
 
-# Loop through each key name and print it
-
-for keyname in $keynames; 
+for keyname in $keynames;
 do
-    echo "Currently available Keypair is :" $keyname
+    echo "Currently available Keypair is in $REGION :" $keyname
 done
 
 exit
