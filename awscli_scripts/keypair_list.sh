@@ -12,7 +12,7 @@ keynames=$(aws ec2 describe-key-pairs --query 'KeyPairs[*].KeyName' --output tex
 
 for keyname in $keynames;
 do
-    echo "Currently available Keypair is in $REGION :" $keyname
+    echo "Currently available Keypair in $REGION is :" $keyname
 done
 
 exit
