@@ -1,0 +1,81 @@
+pipeline {
+  environment {
+    // Define environment variables
+    REGION = "ap-south-1"
+    AWS_ACCESS_KEY_ID = credentials('aws_access_key_id')           // Use Jenkins credentials management
+    AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')  // Use Jenkins credentials management
+  }
+  parameters {
+    // Define parameters for the build
+    string (defaultValue: 'SG314060', description: 'Who is executing the Jenkins Job', name: 'EXECUTOR')
+    choice (choices: ['DEV', 'CERT', 'STAGE', 'PROD'], description: 'Select the environment to deploy the resources', name: 'ENV')
+    choice (choices: ['apply', 'destroy'], description: 'Select the Action', name: 'ACTION')
+  }
+  options {
+    disableConcurrentBuilds()  // Avoid concurrent builds
+  }
+  agent any
+  stages {
+    stage('env_params_value_print') {
+      steps {
+        script {
+          echo "Selected REGION is: ${env.REGION}"
+          echo "Selected Job executor is: ${params.EXECUTOR}"
+          echo "Selected action is: ${params.ACTION}"
+          // Avoid printing sensitive information
+        }
+      }
+    }
+    stage('job_path') {
+      steps {
+        script {
+          echo "Checking the Jenkins workspace folder path"
+          echo "WORKSPACE is: ${env.WORKSPACE}"
+        }
+      }
+    }
+    stage('tf_version') {
+      steps {
+        script {
+          echo "Checking Terraform version"
+          sh '/opt/homebrew/bin/terraform --version'  // Adjust path if needed
+        }
+      }
+    }
+    stage('tf_init') {
+      steps {
+        script {
+          echo "Initializing Terraform"
+          dir('terraf') {
+            sh 'terraform init'
+          }
+        }
+      }
+    }
+    stage('tf_fmt') {
+      steps {
+        script {
+          echo "formatting Terraform configuration"
+          dir('terraf') {
+            sh 'terraform fmt'
+          }
+        }
+      }
+    }
+    stage('tf_plan') {
+      steps {
+        script {
+          echo "Validating Terraform configuration"
+          dir('terraf') {
+            sh 'terraform plan'
+          }
+        }
+      }
+    }
+  }
+  post {
+    always {
+      cleanWs()  // Clean up the workspace after build
+    }
+  }
+}
