@@ -21,6 +21,7 @@ pipeline {
         script {
           echo "Selected REGION is: ${env.REGION}"
           echo "Selected Job executor is: ${params.EXECUTOR}"
+          echo "Selected Environment is: ${params.ENV}"
           echo "Selected action is: ${params.ACTION}"
           // Avoid printing sensitive information
         }
