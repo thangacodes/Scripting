@@ -1,82 +1,92 @@
 pipeline {
-  environment {
-    // Define environment variables
-    REGION = "ap-south-1"
-    AWS_ACCESS_KEY_ID = credentials('aws_access_key_id')           // Use Jenkins credentials management
-    AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')  // Use Jenkins credentials management
-  }
-  parameters {
-    // Define parameters for the build
-    string (defaultValue: 'SG314060', description: 'Who is executing the Jenkins Job', name: 'EXECUTOR')
-    choice (choices: ['DEV', 'CERT', 'STAGE', 'PROD'], description: 'Select the environment to deploy the resources', name: 'ENV')
-    choice (choices: ['apply', 'destroy'], description: 'Select the Action', name: 'ACTION')
-  }
-  options {
-    disableConcurrentBuilds()  // Avoid concurrent builds
-  }
-  agent any
-  stages {
-    stage('env_params_value_print') {
-      steps {
-        script {
-          echo "Selected REGION is: ${env.REGION}"
-          echo "Selected Job executor is: ${params.EXECUTOR}"
-          echo "Selected Environment is: ${params.ENV}"
-          echo "Selected action is: ${params.ACTION}"
-          // Avoid printing sensitive information
+    parameters {
+        // Define parameters for the build
+        string(defaultValue: 'SG314060', description: 'Who is executing the Jenkins Job', name: 'EXECUTOR')
+        choice(choices: ['DEV', 'CERT', 'STAGE', 'PROD'], description: 'Select the environment to deploy the resources', name: 'ENV')
+        choice(choices: ['apply', 'destroy'], description: 'Select the Action', name: 'ACTION')
+        string(defaultValue: 'TFINIT', description: 'Who is executing the Jenkins Job', name: 'TFINIT')
+    }
+    options {
+        disableConcurrentBuilds()  // Avoid concurrent builds
+    }
+    agent any
+    stages {
+        stage('env_params_value_print') {
+            steps {
+                script {
+                    echo "Selected REGION is: ${env.REGION}"
+                    echo "Selected Job executor is: ${params.EXECUTOR}"
+                    echo "Selected Environment is: ${params.ENV}"
+                    echo "Selected action is: ${params.ACTION}"
+                    // Avoid printing sensitive information
+                }
+            }
         }
-      }
-    }
-    stage('job_path') {
-      steps {
-        script {
-          echo "Checking the Jenkins workspace folder path"
-          echo "WORKSPACE is: ${env.WORKSPACE}"
+        stage('job_path') {
+            steps {
+                script {
+                    echo "Checking the Jenkins workspace folder path"
+                    echo "WORKSPACE is: ${env.WORKSPACE}"
+                }
+            }
         }
-      }
-    }
-    stage('tf_version') {
-      steps {
-        script {
-          echo "Checking Terraform version"
-          sh '/opt/homebrew/bin/terraform --version'  // Adjust path if needed
+        stage('tf_version') {
+            steps {
+                script {
+                    echo "Checking Terraform version"
+                    sh '/usr/local/bin/terraform --version'  // Ensure Terraform is in PATH
+                }
+            }
         }
-      }
-    }
-    stage('tf_init') {
-      steps {
-        script {
-          echo "Initializing Terraform"
-          dir('terraf') {
-            sh 'terraform init'
-          }
+        stage('tf_init') {
+            steps {
+                script {
+                    input message: "Do you want to perform ${params.TFINIT} yes or no?" // Use the parameter value in the input message
+                    echo "Initializing Terraform"
+                    dir('/Users/demot/Documents/Jenkins/terraf') {
+                        sh '/usr/local/bin/terraform init'
+                    }
+                }
+            }
         }
-      }
-    }
-    stage('tf_fmt') {
-      steps {
-        script {
-          echo "formatting Terraform configuration"
-          dir('terraf') {
-            sh 'terraform fmt'
-          }
+        stage('tf_fmt') {
+            steps {
+                script {
+                    echo "Formatting Terraform configuration"
+                    dir('/Users/demot/Documents/Jenkins/terraf') {
+                    sh '/usr/local/bin/terraform fmt'
+                    }
+                }
+            }
         }
-      }
-    }
-    stage('tf_plan') {
-      steps {
-        script {
-          echo "Validating Terraform configuration"
-          dir('terraf') {
-            sh 'terraform plan'
-          }
+        stage('tf_plan') {
+            steps {
+                script {
+                    echo "Validating Terraform configuration"
+                    dir('/Users/demot/Documents/Jenkins/terraf') {
+                        sh '/usr/local/bin/terraform plan'
+                    }
+                }
+            }
         }
-      }
+        stage('tf_apply_or_destroy') {
+            when {
+                expression { params.ACTION == 'apply' || params.ACTION == 'destroy' }
+            }
+            steps {
+                script {
+                    input message: "Do you want to perform ${params.ACTION}?"
+                    echo "Executing Terraform ${params.ACTION}"
+                    dir('/Users/demot/Documents/Jenkins/terraf') {
+                        sh "/usr/local/bin/terraform ${params.ACTION} --auto-approve"
+                    }
+                }
+            }
+        }
     }
-  }
-  post {
-    always {
-      cleanWs()  // Clean up the workspace after build
+    post {
+        always {
+            cleanWs()  // Clean up the workspace after build
+        }
     }
-  }
 }
