@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'DOMAIN', defaultValue: 'Cloudbird', description: 'Domain name for SSL certificate')
+        string(name: 'BYTE', defaultValue: '2048', description: 'Bit size of the certificate')
+        string(name: 'DAYS', defaultValue: '365', description: 'Validity period of the certificate in days')
+    }
+    stages {
+        stage('Print env_values') {
+            steps {
+                script {
+                    // Print environment values to the Jenkins console
+                    sh """
+                    echo "You have chosen domain name is: ${params.DOMAIN}"
+                    echo "You have chosen byte size is: ${params.BYTE}"
+                    echo "The days that the cert will be valid/available is: ${params.DAYS}"
+                    """
+                }
+            }
+        }
+        stage('Execute certificate creation script') {
+            steps {
+                script {
+                    // Use withEnv to pass environment variables to the script
+                    withEnv([
+                        "DOMAIN=${params.DOMAIN}",
+                        "BYTE=${params.BYTE}",
+                        "DAYS=${params.DAYS}"
+                    ]) {
+                        dir('/Users/thangaa/Documents/ssl/') {
+                            sh 'bash pipeline_cert.sh' // Ensure the script runs with bash
+                        }
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()  // Clean up the workspace after build
+        }
+    }
+}
