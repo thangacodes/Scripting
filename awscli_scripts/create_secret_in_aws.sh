@@ -6,27 +6,26 @@ region="ap-south-1"
 
 echo "Checking AWS CLI version..."
 aws --version
-
+echo "### @@@@@@@@@@@@@@@@@@@@@@@@@ ###"
 # List existing secrets
 echo "Listing available secrets in AWS account in region $region..."
 existing_secrets=$(aws secretsmanager list-secrets --query "SecretList[?Name=='$secret_name'].Name" --output text --region $region)
 
 if [ "$existing_secrets" == "$secret_name" ]; then
     echo "Secret '$secret_name' already exists."
-    read -p "Do you want to (d)elete it, (c)reate a new one, or (s)kip? (d/c/s): " user_action
+    read -p "Do you want to delete it (OR) create a new one (OR) skip (delete/create/skip): " user_action
     case $user_action in
-        d|D)
+        delete|Delete)
             echo "Deleting secret '$secret_name'..."
             aws secretsmanager delete-secret --secret-id $secret_name --force-delete-without-recovery
             echo "Secret '$secret_name' deleted successfully."
             ;;
-        c|C)
-            echo "Creating new secret (this will not create if secret already exists) ..."
-            # Optionally, you can generate a new password here if needed
+        create|CREATE)
+            echo "Creating a new secret (this will not create if secret already exists) ..."
             aws secretsmanager create-secret --name $secret_name --secret-string $password
-            echo "Secret '$secret_name' created successfully."
+            echo "Random generated Secret '$secret_name' created using Python3 is successfully..."
             ;;
-        s|S)
+        skip|SKIP)
             echo "Skipping any changes to secret '$secret_name'."
             ;;
         *)
@@ -34,17 +33,20 @@ if [ "$existing_secrets" == "$secret_name" ]; then
             ;;
     esac
 else
-    read -p "No existing secret found. Do you want to create a new secret? (y/n): " create_secret
-    if [[ "$create_secret" =~ ^[Yy]$ ]]; then
-        echo "Creating a new secret in $region..."
-        aws secretsmanager create-secret --name $secret_name --secret-string $password
-        echo "Secret '$secret_name' created successfully."
-    else
-        echo "No action taken. Exit the script...!!"
-    fi
+read -p "No existing secret found. Do you want to create a new secret? (y/n): " create_secret
+if [[ $create_secret =~ ^[Yy]$ ]]; then
+    echo "Creating a new secret in AWS..."
+    aws secretsmanager create-secret --name $secret_name --secret-string $password --region $region
+    echo "Secret '$secret_name' created successfully."
+elif [[ $create_secret =~ ^[Nn]$ ]]; then
+    echo "No action taken. Exiting the script...!!"
+else
+    echo "Invalid input. Please enter 'y' or 'n'. Exiting the script...!!"
+    exit 1
+fi
 fi
 
 # List all available secrets
 echo "Cross checking if any secrets exist or not..."
-aws secretsmanager list-secrets --region $region
+aws secretsmanager list-secrets
 exit 0
