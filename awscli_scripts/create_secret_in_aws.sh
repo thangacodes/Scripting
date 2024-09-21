@@ -1,16 +1,15 @@
 #!/bin/bash
 echo "Script to manage secrets for the RDS instance via AWS CLI..."
-secret_name="db_instance_pass"
+read -p "Enter the secret_name that you wanted to be setup for RDS instance: " secret_name
+echo "your input is :" $secret_name
 password=`python3 -c "from string import ascii_letters; from string import digits; from random import choices; print(\"\".join(choices(ascii_letters + digits, k=16)))";`
 region="ap-south-1"
 
 echo "Checking AWS CLI version..."
 aws --version
-echo "### @@@@@@@@@@@@@@@@@@@@@@@@@ ###"
 # List existing secrets
 echo "Listing available secrets in AWS account in region $region..."
 existing_secrets=$(aws secretsmanager list-secrets --query "SecretList[?Name=='$secret_name'].Name" --output text --region $region)
-
 if [ "$existing_secrets" == "$secret_name" ]; then
     echo "Secret '$secret_name' already exists."
     read -p "Do you want to delete it (OR) create a new one (OR) skip (delete/create/skip): " user_action
@@ -45,7 +44,6 @@ else
     exit 1
 fi
 fi
-
 # List all available secrets
 echo "Cross checking if any secrets exist or not..."
 aws secretsmanager list-secrets
