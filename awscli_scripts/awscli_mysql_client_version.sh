@@ -40,6 +40,13 @@ else
     exit 1
 fi
 
-# Please note: 
-# The command command -v aws checks if the aws command is available.
-# The command command -v mysql checks if the mysql command is available.
+# Please note 
+# command -v aws checks if the aws command is available.
+# command -v mysql checks if the mysql command is available.
+# >: This operator redirects standard output (stdout).
+# /dev/null: This is a special file that discards all data written to it. When you redirect output to /dev/null, it effectively silences any output from the command.
+# 2>&1:   ==> means below,
+
+# 2: Refers to standard error (stderr).
+# >&1: This means to redirect standard error to wherever standard output is currently going. 
+# In this case, since stdout has already been redirected to /dev/null, stderr will also be redirected there.
