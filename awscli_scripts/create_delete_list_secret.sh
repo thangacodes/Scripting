@@ -40,7 +40,7 @@ delete_secret() {
     fi
 }
 
-# Example of using the functions
+# Invoking functions based on user accounts.
 read -p "Do you want to create or delete a secret? (create/delete/list): " user_action
 
 if [ "$user_action" == "create" ]; then
