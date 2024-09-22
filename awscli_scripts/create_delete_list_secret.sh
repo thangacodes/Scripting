@@ -7,6 +7,13 @@ password=`python3 -c "from string import ascii_letters; from string import digit
 # Function to list existing secret
 list_secret(){
     aws secretsmanager list-secrets
+    checking_secrets=$(aws secretsmanager list-secrets --query "SecretList[*].Name" --output text)
+    ACCOUNT_NUMBER=$(aws sts get-caller-identity --query Account --output text)
+    if [ -z "$checking_secrets" ]; then
+        echo "No secrets found agains an AWS account: $ACCOUNT_NUMBER and the specified region: $region"
+    else
+        echo "retrying to see if any secrets there or not: $checking_secrets"
+    fi
 }
 
 # Function to create a secret
