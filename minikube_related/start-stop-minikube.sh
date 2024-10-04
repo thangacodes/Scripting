@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e  # Exit immediately if a command exits with a non-zero status
 
 #Hardcoding some variables
 local_cluster_name="tdcluster"
@@ -32,7 +33,7 @@ echo "What would you like to do?"
 echo "1. Create Minikube cluster"
 echo "2. Delete Minikube cluster"
 echo "3. Minikube Status Check"
-read -p "Please enter your choice (1 or 2): " choice
+read -p "Please enter your choice (1 or 2 or 3): " choice
 
 case $choice in
     1)
@@ -45,7 +46,7 @@ case $choice in
         minikube_status_check
         ;;
     *)
-        echo "Invalid choice. Please enter 1 or 2 or 3."
+        echo "Invalid choice. Please enter (1 or 2 or 3):" choice
         exit 1
         ;;
 esac
