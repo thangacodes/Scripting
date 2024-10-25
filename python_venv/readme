@@ -1,12 +1,28 @@
 # How to Run the Script:
 
 Here is the step by steps procedure to run shell/bash scripts to activate/deactivate Python Venv.
-
 Instead of executing it with sh, use one of the following commands:-
 
+Script folder structure:
+========================
+.
+├── pv_activate.sh
+└── pv_deactivate.sh
+1 directory, 2 files
+
+Activate Venv:
+==============
 source pv_activate.sh
 (OR)
 . pv_activate.sh
 
+De-activate Venv:
+=================
+source pv_deactivate.sh
+(OR)
+. pv_deactivate.sh
+
+
+## Note:
 Running the script with source <script name> (or) . <script name> ensures that the commands are executed in the current shell session. 
 This way, when the virtual environment is activated, it updates the prompt as expected.
