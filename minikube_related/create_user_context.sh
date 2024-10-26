@@ -13,12 +13,8 @@ kubectl config use-context "$USER-context"
 kubectl config current-context
 kubectl create namespace ns-test
 
-echo "Switch over to Minikube context..."
- 
-k config use-context minikube
-
-k config current-context
-
-k config get-contexts 
-
+echo "Switch to Minikube context..."
+kubectl config use-context minikube
+kubectlconfig current-context
+kubectl config get-contexts 
 exit 0
