@@ -1,0 +1,10 @@
+To create a ClusterRole and ClusterRoleBinding, you need to follow the commands below using kubectl.
+
+File structure:
+===============
+.
+├── ClusterRole.yaml
+├── ClusterRole_binding.yaml
+
+$ kubectl apply -f cluster-role.yaml
+$ kubectl apply -f cluster-role-binding.yaml
