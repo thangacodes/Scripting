@@ -1,0 +1,96 @@
+To install the latest minikube stable release on ARM64 macOS using Homebrew:
+
+$ brew install minikube
+
+$ alias ma='minikube start'
+$ alias mb='minikube stop'
+$ alias ms='minikube status'
+
+This ensures that any new aliases (OR) settings take effect immediately without needing to restart your terminal session.
+$ source ~/.zshrc 
+
+Instead of typing the full command each time in Linux or macOS, you should create a permanent alias as shown below:
+
+Linux:
+alias k='kubectl'
+source ~/.bashrc     (OR)
+
+macOS:
+alias k='kubectl'
+source ~/.zshrc      
+===============================================================================
+Here are some important commands related to RBAC in Minikube and Kubernetes:
+
+1) The OpenSSL commands are used to generate a private key, a certificate signing request (CSR), and a self-signed certificate, 
+which can be useful in various contexts, including securing applications.
+
+openssl genrsa -out dev.key 2048
+openssl req -new -key dev.key -out dev.csr -subj “/CN=dev/O=devgroup”
+openssl x509 -req -in dev.csr -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key -CAcreateserial -out dev.crt -days 100
+k config set-credentials dev --client-certificate=dev.crt --client-key=dev.key
+k config set-context dev-context --cluster=minikube --user=dev
+k config view
+k config use-context dev-context
+k config current-context
+k create namespace ns-test
+
+
+k auth can-i create pods
+k auth can-i get pods
+k auth can-i delete pods
+k auth can-i create deployments
+k auth can-i delete deployments
+k auth can-i create ns         
+k auth can-i create namespaces
+k auth can-i delete namespace 
+k auth can-i create replicaset
+k auth can-i delete replicaset
+
+RBAC:
+=====
+k config current-context
+k config view --minify
+k config get-contexts
+k config use-context minikube
+k config current-context
+k config use-context user1-context        // switch context to the user that you created
+k config current-context                 // Cross checking which user has logged into kubernetes cluster 
+k config get-contexts                   // List all existing contexts
+k config delete-context user1-context  // delete the user-context
+kubectl config get-contexts           // verify if the user-context deleted or not
+k apply -f role.yaml 
+k apply -f role_binding.yaml
+
+### List/Delete clusteRole and clusterRolebinding 
+k get role -n default
+k delete role pod-admin -n default
+k delete role pod-ns-admin -n default
+
+##### API:
+k api-resources
+k api-resources -o wide
+k api-resources | grep role
+k api-resources | grep deployments
+k api-resources | grep daemonsets
+k api-resources | grep replicasets
+
+=========================================
+A simple pod creation for nginx container.
+
+# touch nginx.yaml 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+
+# k apply -f nginx.yaml 
+# k get pods
