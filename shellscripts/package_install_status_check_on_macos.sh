@@ -14,7 +14,7 @@ check_package() {
 install_package() {
     case $1 in
         pip3)
-            brew install python  # pip3 comes with python
+            brew install pi3
             ;;
         psql)
             brew install postgresql
@@ -25,22 +25,30 @@ install_package() {
         checkov)
             brew install checkov
             ;;
+        minikube)
+            brew install minikube
+            ;;
+        jq)
+            brew install jq
+            ;;
+        synk)
+            brew install snyk
+            synk --version
+            ;;
+        vault)
+            brew install vault
+            ;;
         *)
             echo "No install method for $1"
             ;;
     esac
 }
 
-# Check and install pip3
-check_package "pip3"
+# List of packages to check
+packages=("pip3" "psql" "tree" "checkov" "minikube" "jq" "synk" "vault")
 
-# Check and install PostgreSQL client
-check_package "psql"
-
-# Check and install tree
-check_package "tree"
-
-# Check and install Checkov
-check_package "checkov"
-
+# Loop through the list and check each package
+for package in "${packages[@]}"; do
+    check_package "$package"
+done
 echo "All checks have been completed."
