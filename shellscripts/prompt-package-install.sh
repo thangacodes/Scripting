@@ -1,29 +1,40 @@
-### This shell script, will install the customer require package, based on their input.
-
 #!/bin/bash
 
+set -e  # Exit immediately if a command exits with a non-zero status
 echo "____________________ Testing __________________"
+# Prompt user for package name
+read -p "Enter the package you'd like to install on the systems: " PACKAGE
+# Verify the package name
+echo "Verifying the package name entered by the user: $PACKAGE"
+# Install the package
+if sudo yum install -y "$PACKAGE"; then
+    echo "$PACKAGE installed successfully."
+else
+    echo "Failed to install $PACKAGE. Please check the package name and try again."
+    exit 1
+fi
 
-read -p "Enter the package, you'd like to install on the systems: " PACKAGE
+# Check DNS resolution for examples
+echo "Checking DNS resolution..."
+for domain in google.com linkedin.com; do
+    echo "Resolving $domain..."
+    nslookup "$domain" || echo "Failed to resolve $domain."
+done
 
-sleep 1
+# List the installed package
+if yum list installed | grep -q "$PACKAGE"; then
+    echo "$PACKAGE is installed."
+else
+    echo "$PACKAGE is not installed."
+fi
 
-echo "Verifying the package name entered by an user" $PACKAGE
-
-sudo yum install -y $PACKAGE
-
-nslookup google.com
-
-sleep 5
-
-nslookup linkedin.com
-
-sudo yum list installed | grep $PACKAGE
-
-sleep 5
-
-echo " Going to un-install bind-utils package"
-
-sudo yum remove -y $PACKAGE
+# Uninstall the package
+echo "Going to uninstall $PACKAGE..."
+if sudo yum remove -y "$PACKAGE"; then
+    echo "$PACKAGE uninstalled successfully."
+else
+    echo "Failed to uninstall $PACKAGE."
+    exit 1
+fi
 
 echo "____________ Script Ends __________"
