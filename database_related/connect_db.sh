@@ -23,8 +23,15 @@ connect_dest() {
 echo "\e[1;32m Which database do you want to connect to? (src/dest)"
 read -r db_choice
 
-# Print the selected database choice
-echo "\e[1;33m 'You have selected db choice as: $db_choice and the db endpoint to connect is': $dest_db "
+# Print the selected database choice and the corresponding endpoint
+if [ "$db_choice" = "src" ]; then
+    echo "You have selected the source database, and the endpoint to connect is: $src_db"
+elif [ "$db_choice" = "dest" ]; then
+    echo "You have selected the destination database, and the endpoint to connect is: $dest_db"
+else
+    echo "\e[1;31m Invalid choice. Please choose 'src' or 'dest'."
+    exit 1
+fi
 
 # Use case statement to handle user input
 case $db_choice in
