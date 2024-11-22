@@ -12,11 +12,11 @@ To achieve this, you can create a Python virtual environment, install the requir
 2. Navigate to the folder
 3. Change the script file permissions to make it executable by the user:
    
-$ chmod +x venv_py_script.sh
+   $ chmod +x venv_py_script.sh
 
 5. Execute the shell script
 
-./venv_py_script.sh
+   ./venv_py_script.sh
 
 6. During execution, the script will prompt the user to provide inputs. Once the user provides the feedback, the script will continue from there,
    
