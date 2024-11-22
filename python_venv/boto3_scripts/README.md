@@ -1,5 +1,7 @@
 This folder contains Python and shell scripts. 
+
 The goal is to enable users to run pip3 packages that are not supported in some situations by certain operating systems like macOS, Linux, or Windows. 
+
 To achieve this, you can create a Python virtual environment, install the required packages within the virtual environment, and then run your Python scripts
 
 # Folder Structure
