@@ -18,7 +18,7 @@ To achieve this, you can create a Python virtual environment, install the requir
 
    ./venv_py_script.sh
 
-6. During execution, the script will prompt the user to provide inputs. Once the user provides the feedback, the script will continue from there,
+6. During execution, the script will prompt the user to provide inputs. Once the user provides the inputs, the script will continue from there,
    
 
 
