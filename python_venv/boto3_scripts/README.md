@@ -4,8 +4,8 @@ To achieve this, you can create a Python virtual environment, install the requir
 
 # Folder Structure
 
-├── simple.py
-└── venv_py_script.sh
+ ![image](https://github.com/user-attachments/assets/9e31dfa9-a4a3-46d7-9e31-8f4bb5745837)
+
 
 # Execution method,
 1. Clone the repository
