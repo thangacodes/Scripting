@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "\e[1;32m Script executed on:" $(date '+%Y-%m-%d %H:%M:%S')
+echo "The script was executed on: $(date '+%Y-%m-%d %H:%M:%S')"
 
 # Variables
 src_db="apache1.ap-south-1.rds.amazonaws.com"
@@ -9,13 +9,19 @@ username="admin postgres"
 
 # Function to connect to the source database
 connect_src() {
-    echo "\e[1;32m Connecting to the source database $src_db"
+        # Use nslookup to get the IP address of the database
+        src_dbip=$(nslookup $src_db | awk '/^Address: / { print $2 }')
+        echo
+        echo "Connecting to the source database $src_db and it's IP address: $src_dbip"
     psql -h $src_db -p $port -U $username
 }
 
-# Function to connect to the destination database
+# Function to connect to the destination databas
 connect_dest() {
-    echo "\e[1;32m Connecting to the destination database $dest_db"
+        # Use nslookup to get the IP address of the database
+        dest_dbip=$(nslookup $dest_db | awk '/^Address: / { print $2 }')
+        echo
+    echo "Connecting to the destination database $dest_db and it's IP address: $dest_dbip"
     psql -h $dest_db -p $port -U $username
 }
 
