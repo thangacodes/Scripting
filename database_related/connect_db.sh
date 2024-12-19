@@ -32,7 +32,7 @@ read -r db_choice
 
 # Validate database choice
 if [ "$db_choice" != "src" ] && [ "$db_choice" != "dest" ]; then
-    echo -e "\e[1;31mInvalid choice. Please choose 'src' or 'dest'."
+    echo -e "\e[1;31m Invalid choice. Please choose 'src' or 'dest'."
     exit 1
 fi
 
