@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "The script was executed on: " $(date '+%Y-%m-%d %H:%M:%S')
+echo "The script was executed on:" $(date '+%Y-%m-%d %H:%M:%S')
 
 # Variables
 src_db="apache1.ap-south-1.rds.amazonaws.com"
@@ -38,20 +38,20 @@ fi
 
 # Prompt user for user type
 echo "Which user do you want to login as? (root/app)"
-read -r user_type
+read -r usertype
 
 # Validate user type choice and set the username
-if [ "$user_type" = "root" ]; then
+if [ "$usertype" = "root" ]; then
     username=$root_username
-elif [ "$user_type" = "app" ]; then
+elif [ "$usertype" = "app" ]; then
     username=$app_username
 else
-    echo -e "\e[1;31mInvalid choice. Please choose 'root' or 'app'."
+    echo -e "\e[1;31m Invalid choice. Please choose 'root' or 'app'."
     exit 1
 fi
 
 # Print the selected database and user
-echo "You have selected the $db_choice database and will connect as $user_type user."
+echo "You have selected the $db_choice database and will connect as $usertype user."
 
 # Use case statement to handle database connection
 case $db_choice in
@@ -62,6 +62,6 @@ case $db_choice in
         connect_dest
         ;;
     *)
-        echo -e "\e[1;31mInvalid choice. Please choose 'src' or 'dest'."
+        echo -e "\e[1;31m Invalid choice. Please choose 'src' or 'dest'."
         ;;
 esac
