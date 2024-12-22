@@ -13,16 +13,16 @@ read secondary_skills
 echo "Which cloud do you prefer to use and work with day in and day out?"
 read cloud
 
+# Output the results as positional arguments
+echo "Your good Name is:" $1
+echo "Your IT experience is:" $2
+echo "Your Primary skills sets are:" $3
+echo "Your Secondary skills sets are:" $4
+echo "You are interested in cloud:" $5
+
 # Now we can assign the inputs to arguments (simulating positional parameters)
 set -- "$good_name" "$experience" "$primary_skills" "$secondary_skills" "$cloud"
 
-# Output the results as positional arguments
-echo "Your good name is: $1"
-echo "Your IT experience is: $2"
-echo "Your Primary skills sets are: $3"
-echo "Your Secondary skills are: $4"
-echo "Your interested in cloud: $5"
-
 # Combine all names and display them as a single string
-full_knowledge="My name is $1, and I have around $2 years of experience and expertise in: $3, $4, $5"
+full_knowledge="My name is $1,  and I have around $2 years of experience and expertise in: $3, $4, $5"
 echo $full_knowledge
