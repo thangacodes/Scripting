@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "The script was executed at:" $(date '+%d-%m-%Y %H:%M:%S')
 
 read -p "Enter the bucket prefix, that you would like to keep as an Unique: " USER_INPUT
 echo "User entered the prefix value is:" $USER_INPUT
