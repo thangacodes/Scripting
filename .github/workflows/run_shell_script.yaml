@@ -16,6 +16,13 @@ jobs:
 
     - name: List files (for debugging purposes)
       run: ls -R macos_related
+    - name: Run system information commands
+      run: |
+        whoami
+        lsblk
+        hostname
+        free -h
+        lscpu
     - name: Run shell script for above
       run: |
         sh macos_related/system_info.sh
