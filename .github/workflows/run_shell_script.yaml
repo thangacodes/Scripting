@@ -1,0 +1,21 @@
+name: Run JSON Processing Script
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  run_script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: List files (for debugging purposes)
+      run: ls -R macos_related
+    - name: Run shell script for above
+      run: |
+        sh macos_related/system_info.sh
