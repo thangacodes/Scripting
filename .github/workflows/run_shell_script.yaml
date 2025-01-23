@@ -6,23 +6,31 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
   run_script:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
-    - name: List files (for debugging purposes)
-      run: ls -R macos_related
-    - name: Run system information commands
+    - name: List files in macos_related (for debugging purposes)
+      run: |
+        if [ -d "macos_related" ]; then
+          ls -R macos_related
+        else
+          echo "Directory macos_related does not exist"
+        fi
+    - name: Run system info commands
       run: |
         whoami
         lsblk
         hostname
         free -h
         lscpu
-    - name: Run shell script for above
+    - name: Run macOS-related script (system_info.sh)
       run: |
-        sh macos_related/system_info.sh
+        if [ -f "macos_related/system_info.sh" ]; then
+          sh macos_related/system_info.sh
+        else
+          echo "Script macos_related/system_info.sh not found"
+        fi
