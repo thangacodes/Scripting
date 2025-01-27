@@ -11,10 +11,13 @@ alias tfplan='terraform plan'
 alias tfapply='terraform apply --auto-approve'
 alias tfdestroy='terraform destroy --auto-approve'
 
+# Variables
+script_path="/Users/murugat/Desktop/hcv/evidence_identity_s3"
+
 tf_init(){
     echo "terraform init in progress.."
     echo 
-    tf_files_location="/Users/td/Desktop/hcv/evidence_identity_s3"
+    tf_files_location=$script_path
     cd $tf_files_location
     echo "You are on the path:" $(pwd)
     echo
@@ -26,7 +29,7 @@ tf_init(){
 tf_fmt(){
     echo "terraform format in progress.."
     echo 
-    tf_files_location="/Users/td/Desktop/hcv/evidence_identity_s3"
+    tf_files_location=$script_path
     cd $tf_files_location
     echo "You are on the path:" $(pwd)
     echo
@@ -39,7 +42,7 @@ tf_validate(){
     echo
     echo "terraform validate in progress.."
     echo 
-    tf_files_location="/Users/td/Desktop/hcv/evidence_identity_s3"
+    tf_files_location=$script_path
     cd $tf_files_location
     echo "You are on the path:" $(pwd)
     echo
@@ -52,7 +55,7 @@ tf_validate(){
 tf_plan(){
     echo "terraform plan in progress.."
     echo 
-    tf_files_location="/Users/td/Desktop/hcv/evidence_identity_s3"
+    tf_files_location=$script_path
     cd ${tf_files_location}
     echo "You are on the path:" $(pwd)
     echo
@@ -63,7 +66,7 @@ tf_plan(){
 tf_apply(){
     echo "terraform apply in progress.."
     echo
-    tf_files_location="/Users/td/Desktop/hcv/evidence_identity_s3"
+    tf_files_location=$script_path
     read -p "Do you want to proceed? (yes/no):" USER_INPUT
     echo "User entered the input as:" $USER_INPUT
     sleep 2
@@ -88,7 +91,7 @@ tf_apply(){
 tf_destroy(){
     echo "terraform destroy in progress.."
     echo 
-    tf_files_location="/Users/td/Desktop/hcv/evidence_identity_s3"
+    tf_files_location=$script_path
     read -p "Do you want to proceed? (yes/no):" USER_INPUT
     echo "User entered the input as:" $USER_INPUT
     sleep 2
