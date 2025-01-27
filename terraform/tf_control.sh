@@ -12,7 +12,7 @@ alias tfapply='terraform apply --auto-approve'
 alias tfdestroy='terraform destroy --auto-approve'
 
 # Variables
-script_path="/Users/murugat/Desktop/hcv/evidence_identity_s3"
+script_path="/Users/td/Desktop/hcv/evidence_identity_s3"
 
 tf_init(){
     echo "terraform init in progress.."
