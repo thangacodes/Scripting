@@ -14,24 +14,37 @@ alias tfdestroy='terraform destroy --auto-approve'
 tf_init(){
     echo "terraform init in progress.."
     echo 
-    tf_files_location="/Users/murugat/Desktop/hcv/evidence_identity_s3"
+    tf_files_location="/Users/td/Desktop/hcv/evidence_identity_s3"
     cd $tf_files_location
+    echo "You are on the path:" $(pwd)
+    echo
+    echo "listing out the files in the current working directory:" $(pwd)
+    echo
     ls -ltr
     tfinit
 }
 tf_fmt(){
     echo "terraform format in progress.."
     echo 
-    tf_files_location="/Users/murugat/Desktop/hcv/evidence_identity_s3"
+    tf_files_location="/Users/td/Desktop/hcv/evidence_identity_s3"
     cd $tf_files_location
+    echo "You are on the path:" $(pwd)
+    echo
+    echo "listing out the files in the current working directory:" $(pwd)
+    echo 
     ls -ltr
     tffmt
 }
 tf_validate(){
-    echo "terraform init in progress.."
+    echo
+    echo "terraform validate in progress.."
     echo 
-    tf_files_location="/Users/murugat/Desktop/hcv/evidence_identity_s3"
+    tf_files_location="/Users/td/Desktop/hcv/evidence_identity_s3"
     cd $tf_files_location
+    echo "You are on the path:" $(pwd)
+    echo
+    echo "listing out the files in the current working directory:" $(pwd)
+    echo
     ls -ltr
     tfvalidate
 }
@@ -39,34 +52,18 @@ tf_validate(){
 tf_plan(){
     echo "terraform plan in progress.."
     echo 
-    tf_files_location="/Users/murugat/Desktop/hcv/evidence_identity_s3"
+    tf_files_location="/Users/td/Desktop/hcv/evidence_identity_s3"
+    cd ${tf_files_location}
+    echo "You are on the path:" $(pwd)
+    echo
+    echo "listing out the files in the current working directory:" $(pwd)
+    echo
     tfplan
-}
-tf_destroy(){
-    echo "terraform destroy in progress.."
-    echo 
-    tf_files_location="/Users/murugat/Desktop/hcv/evidence_identity_s3"
-    read -p "Do you want to proceed? (yes/no):" USER_INPUT
-    echo "User entered the input as:" $USER_INPUT
-    sleep 2
-    if [[ ${USER_INPUT} == "yes" || ${USER_INPUT} == "YES" ]]; then
-        echo "You approved, hence tf destroy will begin shortly"
-    elif [[ ${USER_INPUT} == "no" || ${USER_INPUT} == "NO" ]]; then
-        echo "You are declined to proceed further.."
-        return 1
-    fi
-    # check if there any .tf files in the location
-    if ls "$tf_files_location"/*.tf 1> /dev/null 2>&1; then
-    cd "$tf_files_location"
-    tfdestroy
-    else 
-       echo "terraform apply does not execute"
-    fi
 }
 tf_apply(){
     echo "terraform apply in progress.."
     echo
-    tf_files_location="/Users/murugat/Desktop/hcv/evidence_identity_s3"
+    tf_files_location="/Users/td/Desktop/hcv/evidence_identity_s3"
     read -p "Do you want to proceed? (yes/no):" USER_INPUT
     echo "User entered the input as:" $USER_INPUT
     sleep 2
@@ -79,7 +76,36 @@ tf_apply(){
     # check if there any .tf files in the location
     if ls "$tf_files_location"/*.tf 1> /dev/null 2>&1; then
     cd "$tf_files_location"
+    echo "You are on the path:" $(pwd)
+    echo
+    echo "listing out the files in the current working directory:" $(pwd)
+    echo
     tfapply
+    else 
+       echo "terraform apply does not execute"
+    fi
+}
+tf_destroy(){
+    echo "terraform destroy in progress.."
+    echo 
+    tf_files_location="/Users/td/Desktop/hcv/evidence_identity_s3"
+    read -p "Do you want to proceed? (yes/no):" USER_INPUT
+    echo "User entered the input as:" $USER_INPUT
+    sleep 2
+    if [[ ${USER_INPUT} == "yes" || ${USER_INPUT} == "YES" ]]; then
+        echo "You approved, hence tf destroy will begin shortly"
+    elif [[ ${USER_INPUT} == "no" || ${USER_INPUT} == "NO" ]]; then
+        echo "You are declined to proceed further.."
+        return 1
+    fi
+    # check if there any .tf files in the location
+    if ls "$tf_files_location"/*.tf 1> /dev/null 2>&1; then
+    cd "$tf_files_location"
+    echo "You are on the path:" $(pwd)
+    echo
+    echo "listing out the files in the current working directory:" $(pwd)
+    echo
+    tfdestroy
     else 
        echo "terraform apply does not execute"
     fi
